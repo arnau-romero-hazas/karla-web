@@ -30,11 +30,6 @@ export function Contacto() {
   const canSubmit =
     name.trim() !== "" && emailPattern.test(email) && status !== "sending";
 
-  const linkedinHref =
-    site.socials.linkedin === ""
-      ? `mailto:${site.email}`
-      : site.socials.linkedin;
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (canSubmit === false) {
@@ -157,7 +152,7 @@ export function Contacto() {
               <TikTokIcon className="h-5 w-5" />
             </a>
             <a
-              href={linkedinHref}
+              href={site.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -166,7 +161,9 @@ export function Contacto() {
               <LinkedInIcon className="h-5 w-5" />
             </a>
             <a
-              href="#sec-sectores"
+              href={site.portfolio}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Portfolio"
               className="flex h-[46px] w-[46px] items-center justify-center rounded-full bg-wine text-white transition-transform hover:-translate-y-[3px]"
             >
