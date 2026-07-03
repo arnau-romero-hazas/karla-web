@@ -19,7 +19,7 @@ export function Hero() {
       id="sec-inicio"
       className="relative scroll-mt-[74px] overflow-hidden"
     >
-      <div className="mx-auto grid max-w-[1220px] grid-cols-1 items-center gap-3 px-6 pt-[34px] pb-[76px] min-[900px]:min-h-[660px] min-[900px]:grid-cols-[250px_1fr_350px]">
+      <div className="mx-auto grid max-w-[1220px] grid-cols-1 items-center gap-3 px-6 pt-[34px] pb-[76px] min-[900px]:min-h-[calc(100svh-61px)] min-[900px]:grid-cols-[250px_1fr_350px]">
         <div className="hidden justify-center min-[900px]:flex">
           <MediaSlot
             label="Megáfono halftone (PNG)"
