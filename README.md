@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Karla Molina — Portfolio UGC / SMM
 
-## Getting Started
+Web personal y de captación de leads para Karla Molina (`@karlamolinatalks`), creadora UGC y Social Media Manager en Barcelona. Bilingüe (ES/EN), con landing (Inicio · Sectores · Contacto) y páginas de sector con el trabajo en vídeo/foto.
 
-First, run the development server:
+Stack: Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · Resend (formulario).
+
+## Desarrollo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # servidor local en http://localhost:3000
+npm run build   # build de producción
+npm run start   # sirve el build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Variables de entorno
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copia `.env.example` a `.env.local` y rellena:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `RESEND_API_KEY` — API key de [Resend](https://resend.com/api-keys) para el formulario de contacto.
+- `CONTACT_TO` — email de destino de los mensajes (por defecto el de Karla).
+- `CONTACT_FROM` — remitente verificado en Resend. Sin dominio propio, usa `Karla Web <onboarding@resend.dev>`.
 
-## Learn More
+Sin `RESEND_API_KEY` el formulario responde `not_configured` y no envía.
 
-To learn more about Next.js, take a look at the following resources:
+## Contenido de Karla
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Texto y catálogo (en `src/lib/`):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `sectors.ts` — catálogo de sectores y sus reels/fotos. Añadir trabajo = añadir entradas aquí (data-driven, no hace falta tocar componentes).
+- `i18n.ts` — todos los textos ES/EN.
+- `site.ts` — email y enlaces de redes.
 
-## Deploy on Vercel
+### Fotos y vídeos (sin buckets)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Todo va en `/public/media/` y se registra en `src/lib/media.ts`. Mientras una entrada no exista, la web muestra el placeholder correspondiente.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Fotos** (retratos, gatos, megáfono, sector "Fotos"): suelta el archivo en `/public/media/{brand,pets,fotos}/` y pon su ruta en `media.ts`. Se renderizan optimizadas con `next/image`.
+- **Reels**: no se suben los vídeos (pesan mucho). Se sube una **miniatura** ligera a `/public/media/reels/` y se registra `{ poster, href }` en `reelMedia` por `slotId` — la tarjeta mantiene el diseño (chrome + play) y al hacer clic abre el reel en TikTok/Instagram. Si algún reel se quiere self-hostear, se puede cambiar puntualmente.
+
+Los `slotId` salen de `sectors.ts` (p. ej. `slot-cabello-0`, `pet-zoro`). Ver ejemplos comentados en `media.ts`.
+
+## Diseño
+
+El handoff original (prototipo HTML + screenshots) está en `design/` (ignorada por git).
