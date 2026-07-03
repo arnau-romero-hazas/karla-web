@@ -39,27 +39,33 @@ body {
   background: var(--color-wine);
   color: #fff;
 }
+.bubble-r {
+  border-bottom-right-radius: 3px;
+}
+.bubble-l {
+  border-bottom-left-radius: 3px;
+}
 .bubble-r::after,
 .bubble-l::after {
   content: "";
   position: absolute;
-  bottom: 7px;
-  width: 15px;
-  height: 15px;
+  bottom: 1px;
+  width: 13px;
+  height: 13px;
   background: inherit;
   transform: rotate(45deg);
 }
 .bubble-r::after {
-  right: -5px;
+  right: -6px;
   border-top: 1.6px solid var(--color-wine);
   border-right: 1.6px solid var(--color-wine);
-  border-top-right-radius: 4px;
+  border-top-right-radius: 3px;
 }
 .bubble-l::after {
-  left: -5px;
+  left: -6px;
   border-bottom: 1.6px solid var(--color-wine);
   border-left: 1.6px solid var(--color-wine);
-  border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 3px;
 }
 
 .fld {
