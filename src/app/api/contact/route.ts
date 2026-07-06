@@ -9,6 +9,9 @@ const contactSchema = z.object({
   message: z.string().trim().max(5000),
 });
 
+const envOr = (value: string | undefined, fallback: string): string =>
+  value === undefined || value === "" ? fallback : value;
+
 export async function POST(request: Request) {
   let body: unknown;
   try {
@@ -33,8 +36,11 @@ export async function POST(request: Request) {
     });
   }
 
-  const to = process.env.CONTACT_TO ?? site.email;
-  const from = process.env.CONTACT_FROM ?? "Karla Web <onboarding@resend.dev>";
+  const to = envOr(process.env.CONTACT_TO, site.email);
+  const from = envOr(
+    process.env.CONTACT_FROM,
+    "Karla Web <onboarding@resend.dev>",
+  );
   const { name, email, message } = parsed.data;
 
   const resend = new Resend(apiKey);
